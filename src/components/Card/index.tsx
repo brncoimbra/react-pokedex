@@ -4,7 +4,7 @@ import { FlexBox } from "../Flexbox";
 import * as Atom from "./atoms";
 
 interface ICardProps {
-  id: string;
+  id: number;
   name: string;
   image: string;
   preview?: string;
@@ -25,10 +25,14 @@ const Card: FC<ICardProps> = ({ id, image, name, preview, type }) => {
       >
         <Atom.PokemonSprite src={image} alt='imagem-pokemon' />
       </Atom.PokemonSpot>
-      <FlexBox align='center' justify='space-between' direction='row'>
+      <Atom.PokemonPreviewSection
+        align='center'
+        justify='space-between'
+        direction='row'
+      >
         <Atom.PokemonText type={type}>{name}</Atom.PokemonText>
         {preview && <img src={preview} alt='preview' />}
-      </FlexBox>
+      </Atom.PokemonPreviewSection>
     </Atom.Container>
   );
 };

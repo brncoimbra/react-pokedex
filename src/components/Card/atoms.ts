@@ -28,6 +28,10 @@ export const PokemonSprite = styled.img`
   width: 200px;
 `;
 
+export const PokemonPreviewSection = styled(FlexBox)`
+  height: 100px;
+`;
+
 export const PokemonText = styled.span<TAtomPokemonType>`
   color: ${(props) => props?.theme?.colors?.types?.[props?.type]};
   font-size: 1.25em;
