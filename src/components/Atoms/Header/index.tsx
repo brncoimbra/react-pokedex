@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { MdHome } from "react-icons/md";
 
+// components
 import * as Atom from "./atoms";
 import { Container } from "../Container";
 import { FlexBox } from "../Flexbox";

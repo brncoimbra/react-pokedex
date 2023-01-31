@@ -1,12 +1,13 @@
 import { FC } from "react";
 
-import * as Atom from "./atoms";
+// icons
 import { MdCatchingPokemon } from "react-icons/md";
 
-export interface ILoading {
-  isLoading: boolean;
-  loadingText: string;
-}
+// components
+import * as Atom from "./atoms";
+
+// types
+import type { ILoading } from "./types";
 
 const Loading: FC<ILoading> = ({ isLoading, loadingText }) => {
   if (!isLoading) return null;

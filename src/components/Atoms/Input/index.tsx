@@ -1,11 +1,12 @@
-import { InputHTMLAttributes, FC } from "react";
-import { FlexBox } from "../Flexbox";
+import { FC } from 'react';
 
+// components
+import { FlexBox } from "../Flexbox";
 import * as Atom from "./atoms";
 
-export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-}
+// types
+import type { IInput } from './types';
+
 
 const Input: FC<IInput> = ({ label, ...props }) => {
   return (

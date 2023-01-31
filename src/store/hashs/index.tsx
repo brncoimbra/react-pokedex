@@ -10,4 +10,7 @@ export const atomHashPokemonsList = atom<number>({
   default: 0,
 });
 
-
+export const atomHashPokemon = atom<number>({
+  key: "atomHashPokemon",
+  default: 0,
+});

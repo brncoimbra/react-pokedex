@@ -1,6 +1,6 @@
-import React from "react";
 import { FlexBox } from "../Flexbox";
 
+// components
 import * as Atom from "./atoms";
 
 function InitialPokemons() {

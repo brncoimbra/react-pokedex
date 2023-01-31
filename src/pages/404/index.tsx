@@ -1,5 +1,5 @@
-import { Container, FlexBox } from "../../components";
-import { PokedexView } from "./../../components/PokedexView/index";
+import { Container, FlexBox, PokedexView } from "../../components";
+
 
 const Error404 = () => {
   return (

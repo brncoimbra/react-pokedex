@@ -1,4 +1,32 @@
-import { FlexBox } from "./Flexbox";
-import { Container } from "./Container";
+// components: atoms
+import { Container } from "./Atoms/./Container";
+import { FlexBox } from "./Atoms/./Flexbox";
+import { PokedexView } from "./Atoms/./PokedexView";
+import Button from "./Atoms/Button";
+import Card from "./Atoms/./Card";
+import Header from "./Atoms/./Header";
+import InitialPokemons from "./Atoms/./InitialPokemons";
+import Input from "./Atoms/./Input";
+import Loading from "./Atoms/./Loading";
+import PokemonCount from "./Atoms/./PokemonCount";
 
-export { FlexBox, Container };
+// components: molecules
+import PokemonsSection from "./Molecules/PokemonsSection/index";
+import SinglePokemon from "./Molecules/SinglePokemon/index";
+import PokemonSearch from './Molecules/PokemonSearch/index';
+
+export {
+  Button,
+  Card,
+  Container,
+  FlexBox,
+  Header,
+  InitialPokemons,
+  Input,
+  Loading,
+  PokedexView,
+  PokemonCount,
+  PokemonSearch,
+  PokemonsSection,
+  SinglePokemon,
+};

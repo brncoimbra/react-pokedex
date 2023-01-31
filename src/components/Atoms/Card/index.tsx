@@ -1,15 +1,11 @@
 import { FC } from "react";
-import { TPokemonType } from "../../interface";
+
+// components
 import { FlexBox } from "../Flexbox";
 import * as Atom from "./atoms";
 
-interface ICardProps {
-  id: number;
-  name: string;
-  image: string;
-  preview?: string;
-  type: TPokemonType;
-}
+// types
+import type { ICardProps } from "./types";
 
 const Card: FC<ICardProps> = ({ id, image, name, preview, type }) => {
   return (

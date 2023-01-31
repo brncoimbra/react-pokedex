@@ -1,11 +1,13 @@
 import { FC } from "react";
 
-import * as Atom from "./atoms";
+// icons
 import { MdCatchingPokemon } from "react-icons/md";
 
-export interface IPokemonCount {
-  count: number;
-}
+// components
+import * as Atom from "./atoms";
+
+// types
+import type { IPokemonCount } from "./types";
 
 const PokemonCount: FC<IPokemonCount> = ({ count }) => {
   return (
