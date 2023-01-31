@@ -1,17 +1,20 @@
-import { ButtonHTMLAttributes, FC } from "react";
+import { ButtonHTMLAttributes, FC, ReactNode } from "react";
+import { FlexBox } from "../Flexbox";
 
-import * as Atom from './atoms'
+import * as Atom from "./atoms";
 
 export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick: (e?: any) => void | any;
-  textButton: string;
   disabled?: boolean;
+  children?: ReactNode;
 }
 
-const Button: FC<IButton> = ({ onClick, textButton, disabled }) => {
+const Button: FC<IButton> = ({ children, onClick, disabled }) => {
   return (
     <Atom.Button disabled={disabled} onClick={onClick}>
-      {textButton}
+      <FlexBox align='center' justify='flex-start' direction='row' gap="xxxs">
+        {children}
+      </FlexBox>
     </Atom.Button>
   );
 };

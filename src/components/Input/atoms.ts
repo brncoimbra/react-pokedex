@@ -13,4 +13,9 @@ export const Input = styled.input`
   ::placeholder {
     color: ${(props) => props.theme.font.colors[3]};
   }
+
+  :focus {
+    outline: 1px solid;
+    color: ${(props) => props.theme.colors.primary};
+  }
 `;

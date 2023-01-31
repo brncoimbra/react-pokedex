@@ -16,7 +16,7 @@ const PokemonCount: FC<IPokemonCount> = ({ count }) => {
       gap='xxs'
       wrap='wrap'
     >
-      <MdCatchingPokemon size='20' />
+      <MdCatchingPokemon size='25' />
       {count} Pokemons
     </Atom.PokemonCountContainer>
   );
