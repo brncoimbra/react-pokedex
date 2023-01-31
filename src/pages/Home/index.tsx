@@ -6,7 +6,7 @@ import {
 } from "recoil";
 
 // icons
-import { MdCatchingPokemon } from "react-icons/md";
+import { MdSearch, MdAutorenew, MdAdd } from "react-icons/md";
 
 // components
 import Card from "../../components/Card";
@@ -14,6 +14,7 @@ import { FlexBox, Container } from "../../components";
 import { PokedexView } from "../../components/PokedexView";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import Loading from "../../components/Loading";
 
 // recoil: atoms
 import {
@@ -33,6 +34,7 @@ import {
 // hashs
 import { atomHashPokemonsFetch, atomHashPokemonsList } from "../../store/hashs";
 import PokemonCount from "../../components/PokemonCount";
+import InitialPokemons from "../../components/InitialPokemons";
 
 const HomePage = () => {
   // local: states
@@ -79,6 +81,11 @@ const HomePage = () => {
     }
   }, [fetchLoadablePokemon.state, getLoadablePokemons.state]);
 
+  const pokemonsCounter = useMemo(() => {
+    return fetchLoadablePokemon.contents.count;
+  }, [fetchLoadablePokemon.contents.count]);
+
+  // callbacks
   const retryFetchMorePokemons = useCallback(() => {
     if (fetchLoadablePokemon.state === "hasError") {
       setHashFetchMorePokemons(hashFetchMorePokemons + 1);
@@ -115,78 +122,125 @@ const HomePage = () => {
 
   return (
     <Container>
-      <FlexBox align='flex-start' justify='center' direction='column' gap='xxs'>
+      <FlexBox
+        align='flex-start'
+        justify='center'
+        direction='column'
+        gap='xxxs'
+      >
+        <InitialPokemons />
         <FlexBox align='center' justify='flex-start' direction='row' gap='xxs'>
           <Input
             placeholder='Procurar por nome ou ID'
             type='text'
             onChange={(e) => setSearchPokemon(e.target.value)}
           />
-          <Button
-            onClick={() => setPokemon(searchPokemon)}
-            textButton='Procurar'
-          />
+          <Button onClick={() => setPokemon(searchPokemon)}>
+            <MdSearch size='20' /> Procurar
+          </Button>
         </FlexBox>
-        {getLoadablePokemon?.state === "loading" && <div>Loading...</div>}
+        <Loading
+          loadingText='Carregando pokemon...'
+          isLoading={getLoadablePokemon?.state === "loading"}
+        />
         {getLoadablePokemon?.state === "hasValue" &&
           getLoadablePokemon?.contents !== undefined && (
-            <Card
-              type={getLoadablePokemon?.contents?.types[0]?.type?.name}
-              id={getLoadablePokemon.contents.id}
-              preview={
-                getLoadablePokemon?.contents?.sprites?.versions?.[
-                  "generation-v"
-                ]?.["black-white"]?.animated?.front_default
-              }
-              image={
-                getLoadablePokemon?.contents?.sprites.other?.dream_world
-                  ?.front_default ||
-                getLoadablePokemon?.contents?.sprites.other?.[
-                  "official-artwork"
-                ]?.front_default ||
-                ""
-              }
-              name={getLoadablePokemon?.contents?.name}
-            />
+            <PokedexView
+              align='flex-start'
+              justify='center'
+              direction='column'
+              gap='xxs'
+              wrap='wrap'
+            >
+              <FlexBox
+                align='center'
+                justify='center'
+                direction='row'
+                gap='xxs'
+                wrap='wrap'
+              >
+                <Card
+                  type={getLoadablePokemon?.contents?.types[0]?.type?.name}
+                  id={getLoadablePokemon.contents.id}
+                  preview={
+                    getLoadablePokemon?.contents?.sprites?.versions?.[
+                      "generation-v"
+                    ]?.["black-white"]?.animated?.front_default
+                  }
+                  image={
+                    getLoadablePokemon?.contents?.sprites.other?.dream_world
+                      ?.front_default ||
+                    getLoadablePokemon?.contents?.sprites.other?.[
+                      "official-artwork"
+                    ]?.front_default ||
+                    ""
+                  }
+                  name={getLoadablePokemon?.contents?.name}
+                />
+              </FlexBox>
+            </PokedexView>
           )}
       </FlexBox>
-      <PokemonCount count={fetchLoadablePokemon.contents.count || 0} />
+      <PokemonCount count={pokemonsCounter || 0} />
       <PokedexView
-        align='center'
+        align='flex-start'
         justify='center'
+        direction='column'
+        gap='xxs'
+        wrap='wrap'
+      >
+        <FlexBox
+          align='center'
+          justify='center'
+          direction='row'
+          gap='xxs'
+          wrap='wrap'
+        >
+          {pokemonList.map((pokemon) => (
+            <Card
+              key={pokemon.id}
+              type={pokemon?.types[0]?.type?.name}
+              id={pokemon.id}
+              preview={
+                pokemon?.sprites?.versions?.["generation-v"]?.["black-white"]
+                  ?.animated?.front_default
+              }
+              image={
+                pokemon?.sprites.other?.dream_world?.front_default ||
+                pokemon?.sprites.other?.["official-artwork"]?.front_default ||
+                ""
+              }
+              name={pokemon?.name}
+            />
+          ))}
+          <Loading
+            loadingText='Carregando Pokemons...'
+            isLoading={
+              getLoadablePokemons.state === "loading" ||
+              fetchLoadablePokemon.state === "loading"
+            }
+          />
+        </FlexBox>
+      </PokedexView>
+      <FlexBox
+        align='center'
+        justify='flex-start'
         direction='row'
         gap='xxs'
         wrap='wrap'
       >
-        {pokemonList.map((pokemon) => (
-          <Card
-            key={pokemon.id}
-            type={pokemon?.types[0]?.type?.name}
-            id={pokemon.id}
-            preview={
-              pokemon?.sprites?.versions?.["generation-v"]?.["black-white"]
-                ?.animated?.front_default
-            }
-            image={
-              pokemon?.sprites.other?.dream_world?.front_default ||
-              pokemon?.sprites.other?.["official-artwork"]?.front_default ||
-              ""
-            }
-            name={pokemon?.name}
-          />
-        ))}
-      </PokedexView>
-      <FlexBox align='flex-start' justify='center' direction='column' gap='xxs'>
         <Button
           disabled={disabledFetchMorePokemons}
           onClick={() => setPokemonsOffset(pokemonsOffset + 10)}
-          textButton='Carregar mais'
-        />
+        >
+          <MdAdd size='20' />
+          Carregar mais
+        </Button>
         {hasFetchPokemonError && (
-          <Button
-            onClick={() => retryFetchMorePokemons()}
-            textButton='Tentar novamente'
-          />
+          <Button onClick={() => retryFetchMorePokemons()}>
+            <MdAutorenew size='20' />
+            Tentar novamente
+          </Button>
         )}
       </FlexBox>
     </Container>

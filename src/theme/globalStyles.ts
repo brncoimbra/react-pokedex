@@ -8,7 +8,6 @@ export const ResetCss = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.background};
     padding: 0;
     margin-bottom: ${(props) => props.theme.spacing.sm};
-    margin-top: ${(props) => props.theme.spacing.xs};
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
