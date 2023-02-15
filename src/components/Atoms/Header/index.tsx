@@ -37,7 +37,7 @@ const Header = () => {
             </a>
             <a
               target='_blank'
-              href='https://www.linkedin.com/in/bruno-coimbra-425b34221/'
+              href='https://www.linkedin.com/in/brncoimbra/'
               rel='noreferrer'
             >
               <Atom.HeaderItem>
